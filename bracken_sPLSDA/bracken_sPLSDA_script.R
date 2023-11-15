@@ -98,7 +98,7 @@ dev.off()
 
 
 ### selected variables for each component with their frequency and loading values
-# output the genes selected for a given component and their loading values 
+# output the taxa selected for a given component and their loading values 
 # concatenate those results with the feature stability 
 select.name = selectVar(splsda.mali, comp = 1)$name # extract name of selected variable
 stability = perf.splsda.mali$features$stable$comp1[select.name] # extract the stability values from perf()
