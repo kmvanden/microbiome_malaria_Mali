@@ -37,7 +37,7 @@ plotIndiv(pca.mali, group = Y, ind.names = FALSE, comp = c(1,2),
 ### evaluate classification performance of PLS-DA - using all variables
 # run perf() with 12-fold cross-validation repeated 50 times for 5 components
 plsda.mali = plsda(X_short, Y, ncomp = 5)
-perf.plsda.mali = perf(plsda.mali, validation = "Mfold", folds = 12, nrepeat = 100)
+perf.plsda.mali = perf(plsda.mali, validation = "Mfold", folds = 12, nrepeat = 50)
 plot(perf.plsda.mali)
 
 perf.plsda.mali$choice.ncomp # optimal number of components by prediction distance and error rate 
