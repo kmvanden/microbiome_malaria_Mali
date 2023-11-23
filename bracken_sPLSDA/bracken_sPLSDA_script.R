@@ -140,7 +140,7 @@ pdf("plot_loadings_comp1.pdf", width = 10, height = 7)
 plotLoadings(splsda.mali, 
              comp = 1, # component of interest
              contrib = "max", # color of bar corresponds to group with the maximal expression levels
-             method = "median", # criterion to asses the contribution
+             method = "median", # criterion to assess the contribution
              ndisplay = 30, # how many of the most important variables are plotted
              legend.color = c("dodgerblue3", "firebrick3"), # color of the outcomes
              legend = FALSE
