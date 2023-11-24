@@ -15,14 +15,14 @@ set.seed(20230711)
 
 # read in feature table and metadata
 # check that sample order is the same
-X_short = read.table("metabo_filt_norm.txt", header = TRUE)
-X_short = as.matrix(X_short) # convert to matrix
-X_short = t(X_short) # transpose matrix
-class(X_short)
-dim(X_short)
+X = read.table("metabo_filt_norm.txt", header = TRUE)
+X = as.matrix(X) # convert to matrix
+X = t(X) # transpose matrix
+class(X)
+dim(X)
 
 Y = read.table("metadata_red.txt", header = TRUE)
-sum(row.names(X_short)==row.names(Y)) 
+sum(row.names(X)==row.names(Y)) 
 Y = Y$outcome
 Y = as.factor(Y)
 class(Y)
@@ -30,14 +30,14 @@ summary(Y)
 
 
 ### preliminary PCA analysis - variables zero centered
-pca.mali = pca(X_short, ncomp = 5, scale = TRUE)
+pca.mali = pca(X, ncomp = 5, scale = TRUE)
 plotIndiv(pca.mali, group = Y, ind.names = FALSE, comp = c(1,2),
           legend = TRUE, title = "PCA of metabolomics data")
 
 
 ### evaluate classification performance of PLS-DA - using all variables
 # run perf() with 8-fold cross-validation repeated 50 times for 5 components 
-plsda.mali = plsda(X_short, Y, ncomp = 5)
+plsda.mali = plsda(X, Y, ncomp = 5)
 perf.plsda.mali = perf(plsda.mali, validation = "Mfold", folds = 8, nrepeat = 50)
 plot(perf.plsda.mali)
 
@@ -51,7 +51,7 @@ perf.plsda.mali$error.rate # error rate for each component
 # estimation of classification error rate with respect to the number of variables
 #run tune.splsda() with 8-fold cross-validation repeated 50 times for 5 components 
 list.keepX = c(1:10, seq(15, 790, 5))
-tune.splsda.mali = tune.splsda(X_short, Y, ncomp = 5, validation = "Mfold",
+tune.splsda.mali = tune.splsda(X, Y, ncomp = 5, validation = "Mfold",
                                folds = 8, nrepeat = 50, dist = "centroids.dist",
                                test.keepX = list.keepX)
 
@@ -76,7 +76,7 @@ ncomp = 2 # ncomp increased to 2 to allow visualization of model using mixOmics 
 select.keepX = tune.splsda.mali$choice.keepX[1:ncomp]
 
 # final model
-splsda.mali = splsda(X_short, Y, ncomp = ncomp, keepX = select.keepX)
+splsda.mali = splsda(X, Y, ncomp = ncomp, keepX = select.keepX)
 
 # model performance
 # performance of model assessed with perf() using 8-fold cross-validation repeated 50 times
