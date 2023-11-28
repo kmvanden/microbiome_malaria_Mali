@@ -2,7 +2,7 @@
 
 cd /Users/kmvanden/Desktop/bracken_bray_curtis
 
-conda activate qiime2-2022.11
+source activate qiime2-2022.11
 
 biom convert -i deseq2_norm_med_table.txt -o deseq2_norm_med_table.biom --to-hdf5
 
