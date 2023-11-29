@@ -179,13 +179,13 @@ corncob_df = function(corncob_results){
   return(df)
 }
 
-# use the function to filter taxa with to padj < 0.05
+# use the function to filter taxa with padj < 0.05
 corncob_padj005 = corncob_df(corncob_all005) %>%
   filter(fdr < 0.05) %>%
   filter(!grepl("Intercept", covariate))
 write.csv(as.data.frame(corncob_padj005), file = "corncob_padj005.csv")
 
-# use the function to filter taxa with to padj < 0.10
+# use the function to filter taxa with padj < 0.10
 corncob_padj010 = corncob_df(corncob_all010) %>%
   filter(fdr < 0.10) %>%
   filter(!grepl("Intercept", covariate))
