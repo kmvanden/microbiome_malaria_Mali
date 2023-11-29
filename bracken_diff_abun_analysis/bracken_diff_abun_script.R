@@ -5,7 +5,6 @@
 
 # set working directory
 setwd("/N/scratch/kmvanden/bracken_diff_abun")
-set.seed(20230711)
 
 ### DESEQ2 ###
 
@@ -207,7 +206,7 @@ metadata = read.table("metadata.txt")
 sum(row.names(metadata)==colnames(otu_med))
 
 
-### CREATE MAASLIN2 OBJECT AND EXPORT DATA TO DIRECTORIES
+### CREATE MAASLIN2 OBJECT
 # significant features with padj < 0.05
 fit_data005 = Maaslin2(input_data = otu_med, input_metadata = metadata, output = "maaslin2_output005",
                        normalization = "TSS", transform = "LOG", standardize = FALSE, max_significance = 0.05, 
