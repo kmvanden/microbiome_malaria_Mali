@@ -123,24 +123,6 @@ summary(corncob) # summary of model output
 
 
 ### TESTING AND PLOTTING ALL TAXA
-# test and plot all taxa at a padj of < 0.05
-corncob_all005 = differentialTest(formula = ~ outcome,
-                                  phi.formula = ~ outcome,
-                                  formula_null = ~ 1,
-                                  phi.formula_null = ~ outcome,
-                                  test = "Wald", boot = FALSE,
-                                  data = phylo,
-                                  fdr_cutoff = 0.05)
-
-# list of significant taxa (49 at padj < 0.05)
-corncob_all005$significant_taxa 
-
-# lists the model and associated coefficients for significant taxa
-corncob_all005$significant_models[[1]]
-
-# plot the model coefficients of our results for significant taxa
-plot(corncob_all005)
-
 # test and plot all taxa at a padj of < 0.10
 corncob_all010 = differentialTest(formula = ~ outcome,
                                   phi.formula = ~ outcome,
@@ -177,12 +159,6 @@ corncob_df = function(corncob_results){
     select(covariate, estimate, std_error, t_value, fdr = pr_t, taxa_name)
   return(df)
 }
-
-# use the function to filter taxa with padj < 0.05
-corncob_padj005 = corncob_df(corncob_all005) %>%
-  filter(fdr < 0.05) %>%
-  filter(!grepl("Intercept", covariate))
-write.csv(as.data.frame(corncob_padj005), file = "corncob_padj005.csv")
 
 # use the function to filter taxa with padj < 0.10
 corncob_padj010 = corncob_df(corncob_all010) %>%
