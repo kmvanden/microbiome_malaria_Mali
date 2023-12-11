@@ -38,6 +38,11 @@ sparcc_network_med = netConstruct(otu_med, group = group,
                                   sparsMethod = "t-test", 
                                   seed = 20230711)
 
+# get edge list
+write.csv(sparcc_network_med$edgelist1, "sparcc_network_med_edges_res.csv", row.names = TRUE)
+write.csv(sparcc_network_med$edgelist2, "sparcc_network_med_edges_sus.csv", row.names = TRUE)
+
+
 ### network analysis - degree centrality
 
 sparcc_analysis_med_deg = netAnalyze(sparcc_network_med, 
@@ -119,6 +124,12 @@ write.csv(sparcc_taxa_deg_res, "sparcc_taxa_deg_res.csv", row.names = TRUE)
 
 sparcc_taxa_deg_sus = sparcc_compare_med_deg_summary$properties$deg2 # degree centrality measures for the susceptible network
 write.csv(sparcc_taxa_deg_sus, "sparcc_taxa_deg_sus.csv", row.names = TRUE)
+
+sparcc_taxa_clust_res = sparcc_compare_med_deg_summary$properties$clust1 # cluster ids for the resistant network 
+write.csv(sparcc_taxa_clust_res, "sparcc_taxa_clust_res.csv", row.names = TRUE)
+
+sparcc_taxa_clust_sus = sparcc_compare_med_deg_summary$properties$clust2 # cluster ids for the susceptible network 
+write.csv(sparcc_taxa_clust_sus, "sparcc_taxa_clust_sus.csv", row.names = TRUE)
 
 
 ### session info ###
