@@ -9,7 +9,6 @@ setwd("/N/scratch/kmvanden/metagen_sPLSDA")
 
 # load libraries
 library(mixOmics)
-set.seed(20230711)
 
 
 # read in feature table and metadata
