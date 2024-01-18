@@ -74,7 +74,7 @@ ncomp = perf.diablo.mali$choice.ncomp$WeightedVote["Overall.BER", "centroids.dis
 
 ### variable selection for sparse method
 # estimation of classification error rate with respect to the number of variables
-# run tune.block.splsda() with 8-fold cross-validation repeated 100 times for 1 component
+# run tune.block.splsda() with 8-fold cross-validation repeated 100 times for 2 components
 test.keepX = list(metagen = seq(20,340,20), metabo = seq(20,780,20))
 set.seed(20230711)
 tune.diablo.mali = tune.block.splsda(X, Y, ncomp = ncomp,
